@@ -2,28 +2,33 @@
 <html>
 <head>
 <title>Pebble App Settings</title>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script>
-  $(document).ready(function(e) {
-    $("#subButton").click(function(e) {
-      var firstName = document.getElementById("first_name").value;
-      var lastName = document.getElementById("last_name").value;
-      var options = { firstname: firstName, lastname: lastName };
-        document.location = 'pebblejs://close#' + encodeURIComponent(JSON.stringify(options));
-    });
-  });
-  
-  
+
+$('#b-cancel').click(function() {
+    document.location = 'pebblejs://close';
+});
+
+function saveOptions() {
+    var options = {
+        searchingFor: $('#searchingFor').val()
+    }
+    return options;
+}
+
+$('#b-submit').click(function() {
+    var location = 'pebblejs://close#' + encodeURIComponent(JSON.stringify(saveOptions()));
+    document.location = location;
+});
+
 </script>
 </head>
 <body>
 <p>Pebble settings</p>
 
-<p>First name:</p>
-<input type="text" id="first_name">
-<p>Last name:</p>
-<input type="text" id="last_name">
-<br>
-<button id="subButton">Submit</button>
+<label for="searchingFor">Whatcha wanna find?</label>
+<textarea cols="40" rows="8" name="searchingFor" id="searchingFor"></textarea>
+<button type="submit" id="b-cancel">Cancel</button>
+<button type="submit" id="b-submit">Submit</button>
+
 </body>
 </html>
