@@ -20,6 +20,24 @@ $('#b-submit').click(function() {
     document.location = location;
 });
 
+function getURLVariable(name)  {
+  name = name.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
+  var regexS = "[\\?&]"+name+"=([^&#]*)",
+      regex = new RegExp(regexS),
+      results = regex.exec(window.location.href);
+  if (results == null) return "";
+  else return results[1];
+}
+
+$(document).ready(function() {
+  var priorSearch = getURLVariable('searchingFor');
+  priorSearch = decodeURI(priorSearch);
+
+  if (priorSearch) {
+    $('#searchingFor').html(priorSearch);
+  }
+}
+
 </script>
 </head>
 <body>
